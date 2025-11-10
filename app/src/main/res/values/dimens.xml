@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    
+    <!-- Text Sizes -->
+    <dimen name="text_city_name">28sp</dimen>
+    <dimen name="text_temperature">48sp</dimen>
+    <dimen name="text_condition">18sp</dimen>
+    <dimen name="text_normal">16sp</dimen>
+    
+    <!-- Icon -->
+    <dimen name="weather_icon_size">120dp</dimen>
+    
+    <!-- Button -->
+    <dimen name="button_height">48dp</dimen>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cold gradient - cool blue -->
+    <gradient
+        android:angle="270"
+        android:startColor="#42A5F5"
+        android:centerColor="#64B5F6"
+        android:endColor="#90CAF9"
+        android:type="linear"/>
+</shape>

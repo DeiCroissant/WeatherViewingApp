@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Weather Viewer</string>
+    
+    <!-- Main Activity -->
+    <string name="city_default">Hanoi</string>
+    <string name="loading_weather">Đang tải dữ liệu thời tiết…</string>
+    <string name="weather_updated">Đã cập nhật dữ liệu</string>
+    <string name="weather_error">Không thể tải dữ liệu thời tiết</string>
+    <string name="btn_refresh">Làm mới</string>
+    <string name="temp_format_c">%s°C</string>
+    <string name="temp_format_f">%s°F</string>
+    <string name="forecast_title">Dự báo 5 ngày</string>
+    
+    <!-- Menu -->
+    <string name="menu_manage_cities">Quản lý Thành phố</string>
+    <string name="menu_settings">Cài đặt</string>
+    <string name="menu_delete">Xóa</string>
+    
+    <!-- Settings Activity -->
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_unit_label">Đơn vị nhiệt độ:</string>
+    <string name="unit_celsius">Độ C (°C)</string>
+    <string name="unit_fahrenheit">Độ F (°F)</string>
+    <string name="cities_title">Quản lý Thành phố</string>
+    <string name="hint_city_name">Nhập tên thành phố</string>
+    <string name="btn_add_city">Thêm</string>
+    <string name="city_added">Đã thêm thành phố</string>
+    <string name="city_exists">Thành phố đã tồn tại</string>
+    <string name="city_empty">Vui lòng nhập tên thành phố</string>
+    <string name="city_deleted">Đã xóa thành phố</string>
+    <string name="confirm_delete_title">Xác nhận xóa</string>
+    <string name="confirm_delete_message">Bạn có chắc muốn xóa \"%s\"?</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">Hủy</string>
+    <string name="no_cities">Chưa có thành phố nào. Hãy thêm thành phố!</string>
+    
+    <!-- Weather Conditions (for API response) -->
+    <string name="condition_clear">Trời quang</string>
+    <string name="condition_clouds">Mây</string>
+    <string name="condition_rain">Mưa</string>
+    <string name="condition_snow">Tuyết</string>
+    <string name="condition_thunderstorm">Dông</string>
+    <string name="condition_mist">Sương mù</string>
+    
+    <!-- Errors -->
+    <string name="error_network">Lỗi kết nối mạng</string>
+    <string name="error_no_internet">Không có kết nối Internet. Hiển thị dữ liệu cuối cùng.</string>
+    <string name="error_api">Lỗi từ API</string>
+    <string name="error_gps_disabled">GPS đã tắt. Vui lòng bật GPS để sử dụng vị trí hiện tại.</string>
+    <string name="error_api_quota">Đã vượt quá giới hạn API. Vui lòng thử lại sau.</string>
+    <string name="btn_retry">Thử lại</string>
+    <string name="last_updated">Cập nhật lúc %s</string>
+    <string name="using_cached_data">Đang hiển thị dữ liệu cuối cùng</string>
+</resources>

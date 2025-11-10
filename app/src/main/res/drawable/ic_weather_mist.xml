@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Mist/Fog Icon -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M3,15h18v-2H3V15zM3,19h18v-2H3V19zM3,11h18V9H3V11z"/>
+</vector>

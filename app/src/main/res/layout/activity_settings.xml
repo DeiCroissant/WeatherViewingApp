@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_normal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Temperature Unit Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_unit_label"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="@dimen/margin_small" />
+
+        <RadioGroup
+            android:id="@+id/rgTemperatureUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbCelsius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/unit_celsius"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/rbFahrenheit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/unit_fahrenheit" />
+        </RadioGroup>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large" />
+
+        <!-- City Management Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cities_title"
+            android:textSize="@dimen/text_normal"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="@dimen/margin_small" />
+
+        <!-- Add City Input -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/margin_medium">
+
+            <EditText
+                android:id="@+id/etCityName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/hint_city_name"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:imeOptions="actionDone" />
+
+            <Button
+                android:id="@+id/btnAddCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_add_city"
+                android:layout_marginStart="@dimen/margin_small" />
+        </LinearLayout>
+
+        <!-- City List -->
+        <TextView
+            android:id="@+id/tvNoCities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_cities"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/lvCities"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:divider="?android:attr/listDivider"
+            android:dividerHeight="1dp" />
+
+    </LinearLayout>
+</ScrollView>

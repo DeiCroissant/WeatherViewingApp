@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cloudy gradient - gray colors -->
+    <gradient
+        android:angle="270"
+        android:startColor="#78909C"
+        android:centerColor="#90A4AE"
+        android:endColor="#CFD8DC"
+        android:type="linear"/>
+</shape>

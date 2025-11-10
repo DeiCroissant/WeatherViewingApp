@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Rain gradient - blue-gray colors -->
+    <gradient
+        android:angle="270"
+        android:startColor="#546E7A"
+        android:centerColor="#607D8B"
+        android:endColor="#90A4AE"
+        android:type="linear"/>
+</shape>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/forecast_item_background">
+    
+    <!-- Day name -->
+    <TextView
+        android:id="@+id/tvForecastDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T2"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+    
+    <!-- Weather icon -->
+    <ImageView
+        android:id="@+id/ivForecastIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_weather_clear"
+        android:layout_marginBottom="8dp" />
+    
+    <!-- Max temperature -->
+    <TextView
+        android:id="@+id/tvForecastMaxTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="28°"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+    
+    <!-- Min temperature -->
+    <TextView
+        android:id="@+id/tvForecastMinTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22°"
+        android:textSize="14sp"
+        android:textColor="#CCFFFFFF"
+        android:layout_marginTop="2dp" />
+    
+</LinearLayout>
