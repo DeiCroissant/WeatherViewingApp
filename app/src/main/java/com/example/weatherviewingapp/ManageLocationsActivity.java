@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,18 +49,21 @@ public class ManageLocationsActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private LocationAdapter locationAdapter;
     private List<Location> locations;
-    private List<String> citySearchResults;
     
-    private static final String API_KEY = "f4f8b8c6cb6bc92ebc999dd51c61bf4e";
+    private static final String API_KEY = "c087fa97752f540e360b43023b2d945a";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_locations);
         
+        // Setup Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        
         // Set title
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Manage Locations");
+            getSupportActionBar().setTitle("Quản lý Thành phố");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         
@@ -75,7 +80,6 @@ public class ManageLocationsActivity extends AppCompatActivity {
         
         dbHelper = new DatabaseHelper(this);
         locations = new ArrayList<>();
-        citySearchResults = new ArrayList<>();
     }
     
     private void loadLocations() {
@@ -195,9 +199,23 @@ public class ManageLocationsActivity extends AppCompatActivity {
     }
     
     private void setDefaultLocation(Location location) {
+        Log.d("ManageLocations", "Setting default location: " + location.getCityName());
+        
         if (dbHelper.setDefaultLocation(location.getId())) {
-            Toast.makeText(this, location.getCityName() + " set as default", Toast.LENGTH_SHORT).show();
+            // Also update SharedPreferences so MainActivity knows the new default
+            SettingsManager settingsManager = new SettingsManager(this);
+            settingsManager.setDefaultCity(location.getCityName());
+            
+            Log.d("ManageLocations", "SharedPreferences updated with: " + location.getCityName());
+            Log.d("ManageLocations", "Verify: " + settingsManager.getDefaultCity());
+            
+            // Notify MainActivity that data changed
+            setResult(RESULT_OK);
+            
+            Toast.makeText(this, location.getCityName() + " đã được đặt làm mặc định", Toast.LENGTH_LONG).show();
             loadLocations();
+        } else {
+            Toast.makeText(this, "Không thể đặt làm mặc định", Toast.LENGTH_SHORT).show();
         }
     }
     
@@ -225,12 +243,16 @@ public class ManageLocationsActivity extends AppCompatActivity {
             
             try {
                 String encodedQuery = URLEncoder.encode(query, "UTF-8");
-                String urlString = "http://api.openweathermap.org/geo/1.0/direct?q=" + 
+                String urlString = "https://api.openweathermap.org/geo/1.0/direct?q=" + 
                                    encodedQuery + "&limit=5&appid=" + API_KEY;
+                
+                android.util.Log.d("ManageLocations", "Searching: " + urlString);
                 
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
+                connection.setConnectTimeout(10000);
+                connection.setReadTimeout(10000);
                 
                 BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
@@ -245,7 +267,10 @@ public class ManageLocationsActivity extends AppCompatActivity {
                 connection.disconnect();
                 
                 // Parse JSON response
+                android.util.Log.d("ManageLocations", "Response: " + response.toString());
                 JSONArray jsonArray = new JSONArray(response.toString());
+                android.util.Log.d("ManageLocations", "Found " + jsonArray.length() + " cities");
+                
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject city = jsonArray.getJSONObject(i);
                     String name = city.getString("name");
@@ -264,6 +289,7 @@ public class ManageLocationsActivity extends AppCompatActivity {
                 }
                 
             } catch (Exception e) {
+                android.util.Log.e("ManageLocations", "Error searching cities", e);
                 e.printStackTrace();
             }
             
@@ -273,7 +299,12 @@ public class ManageLocationsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<String> results) {
             progressBar.setVisibility(View.GONE);
-            citySearchResults = results;
+            
+            if (results == null || results.isEmpty()) {
+                Toast.makeText(ManageLocationsActivity.this, 
+                    "Không tìm thấy thành phố. Thử lại!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 ManageLocationsActivity.this,
@@ -281,10 +312,7 @@ public class ManageLocationsActivity extends AppCompatActivity {
                 results
             );
             etSearchCity.setAdapter(adapter);
-            
-            if (!results.isEmpty()) {
-                etSearchCity.showDropDown();
-            }
+            etSearchCity.showDropDown();
         }
     }
     

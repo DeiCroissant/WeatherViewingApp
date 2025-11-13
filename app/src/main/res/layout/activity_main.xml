@@ -7,19 +7,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_normal"
-            tools:context=".MainActivity">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-        <!-- Search City Bar -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                tools:context=".MainActivity">
+
+        <!-- Search City Bar with Menu -->
         <LinearLayout
             android:id="@+id/searchContainer"
             android:layout_width="0dp"
@@ -35,10 +35,22 @@
             android:layout_marginTop="8dp">
             
             <ImageView
+                android:id="@+id/ivMenuIcon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="Menu icon"
+                android:padding="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+            
+            <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@android:drawable/ic_menu_search"
                 android:contentDescription="Search icon"
+                android:layout_marginStart="8dp"
                 app:tint="#CCCCCC"/>
             
             <AutoCompleteTextView
@@ -592,4 +604,5 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     
     </androidx.core.widget.NestedScrollView>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

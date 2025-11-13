@@ -15,6 +15,7 @@
     <string name="menu_manage_cities">Quản lý Thành phố</string>
     <string name="menu_settings">Cài đặt</string>
     <string name="menu_delete">Xóa</string>
+    <string name="menu_about">Thông Tin Nhóm</string>
     
     <!-- Settings Activity -->
     <string name="settings_title">Cài đặt</string>

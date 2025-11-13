@@ -58,6 +58,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        
+        <!-- Team Activity -->
+        <activity
+            android:name=".TeamActivity"
+            android:exported="false"
+            android:label="@string/menu_about"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
 
 </manifest>

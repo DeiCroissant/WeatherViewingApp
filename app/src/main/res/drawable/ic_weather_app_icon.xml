@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M60,60m-58,0a58,58 0,1,1 116,0a58,58 0,1,1 -116,0"/>
+    
+    <!-- Sun -->
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M60,25m-12,0a12,12 0,1,1 24,0a12,12 0,1,1 -24,0"/>
+    
+    <!-- Sun rays -->
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M60,10 L60,16 M60,34 L60,40 M45,25 L49,29 M71,21 L75,25 M40,40 L44,44 M76,36 L80,40"/>
+    <path
+        android:fillColor="#FDD835"
+        android:strokeWidth="2"
+        android:strokeColor="#FDD835"
+        android:pathData="M60,10 L60,16 M60,34 L60,40 M45,25 L49,29 M71,21 L75,25 M40,40 L44,44 M76,36 L80,40"/>
+    
+    <!-- Cloud 1 (larger) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,55 Q30,55 30,60 Q30,65 35,65 L65,65 Q70,65 70,60 Q70,55 65,55 Q65,50 60,50 Q55,50 55,55 L35,55 Z"/>
+    
+    <!-- Cloud 2 (smaller, overlapping) -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M50,65 Q45,65 45,70 Q45,75 50,75 L75,75 Q80,75 80,70 Q80,65 75,65 Q75,60 70,60 Q65,60 65,65 L50,65 Z"/>
+    
+    <!-- Rain drops -->
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M40,78 L38,85 M50,80 L48,87 M60,78 L58,85 M70,80 L68,87"/>
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="#64B5F6"
+        android:strokeLineCap="round"
+        android:pathData="M40,78 L38,85 M50,80 L48,87 M60,78 L58,85 M70,80 L68,87"/>
+</vector>

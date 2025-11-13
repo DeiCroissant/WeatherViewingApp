@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +64,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     
     private AutoCompleteTextView etSearchCity;
+    private ImageView ivMenuIcon;
     private TextView tvCityName;
     private ImageView ivWeatherIcon;
     private TextView tvTemperature;
@@ -128,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         mainLayout = findViewById(R.id.main);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        ivMenuIcon = findViewById(R.id.ivMenuIcon);
         etSearchCity = findViewById(R.id.etSearchCity);
         tvCityName = findViewById(R.id.tvCityName);
         ivWeatherIcon = findViewById(R.id.ivWeatherIcon);
@@ -174,6 +178,11 @@ public class MainActivity extends AppCompatActivity {
      * Setup listeners
      */
     private void setupListeners() {
+        // Menu icon click listener
+        ivMenuIcon.setOnClickListener(v -> {
+            showPopupMenu(v);
+        });
+        
         // Search city autocomplete
         etSearchCity.setThreshold(2);
         etSearchCity.setDropDownBackgroundResource(android.R.color.transparent);
@@ -412,8 +421,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         
-        // Reset to Hanoi as default
-        currentCity = "Hanoi";
+        // Use currentCity from settings (don't reset!)
+        // currentCity is already set in onCreate() and onResume()
         currentLat = 0;
         currentLon = 0;
         
@@ -560,6 +569,32 @@ public class MainActivity extends AppCompatActivity {
     
     // ==================== Options Menu (Ch. 4) ====================
     
+    /**
+     * Show popup menu when menu icon is clicked
+     */
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
+        
+        // Force show icons in popup menu
+        try {
+            java.lang.reflect.Field fieldPopup = popupMenu.getClass().getDeclaredField("mPopup");
+            fieldPopup.setAccessible(true);
+            Object menuPopupHelper = fieldPopup.get(popupMenu);
+            Class<?> classPopupHelper = Class.forName(menuPopupHelper.getClass().getName());
+            java.lang.reflect.Method setForceIcons = classPopupHelper.getMethod("setForceShowIcon", boolean.class);
+            setForceIcons.invoke(menuPopupHelper, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        popupMenu.setOnMenuItemClickListener(item -> {
+            return onOptionsItemSelected(item);
+        });
+        
+        popupMenu.show();
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -585,6 +620,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, DebugDatabaseActivity.class);
             startActivity(intent);
             return true;
+        } else if (id == R.id.action_about) {
+            // Navigate to Team Activity
+            Intent intent = new Intent(MainActivity.this, TeamActivity.class);
+            startActivity(intent);
+            return true;
         }
         
         return super.onOptionsItemSelected(item);
@@ -598,7 +638,10 @@ public class MainActivity extends AppCompatActivity {
         
         // Check if settings changed (user might have changed unit or default city)
         String newDefaultCity = settingsManager.getDefaultCity();
+        Log.d("MainActivity", "onResume - currentCity: " + currentCity + ", newDefaultCity: " + newDefaultCity);
+        
         if (!currentCity.equals(newDefaultCity)) {
+            Log.d("MainActivity", "City changed! Fetching weather for: " + newDefaultCity);
             currentCity = newDefaultCity;
             fetchWeatherData(); // Refresh if city changed
         } else {
